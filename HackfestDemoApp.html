@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<title>WatsonNLCTool</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script type="text/javascript" src="js/control.js"></script>
+	<script type="text/javascript" src="js/jquery.json-viewer.js"></script>
+
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/starter-template.css" rel="stylesheet">
+	<link href="css/jquery.json-viewer.css" rel="stylesheet">
+
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">WatsonNLCTool</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+			</div>
+
+		</div>
+	</nav>
+
+	<div class="alert alert-danger hidden" role="alert">
+		資格情報を入力してください。
+	</div>
+
+	<div class="container">
+		<section class="container">
+			<h3>資格情報</h3>
+			<form>
+				<div class="form-group">
+					<input type="text" name="username" placeholder="username" class="form-control">
+				</div>
+				<div class="form-group">
+					<input type="text" name="password" placeholder="password" class="form-control">
+				</div>
+				<div class="form-group">
+					<select class="form-control" id="urlSel">
+						<option>https://gateway.watsonplatform.net/natural-language-classifier/api</option>
+						<option>https://gateway.watson-j.jp/natural-language-classifier/api</option>
+					</select>
+				</div>
+			</form>
+
+			<h3>操作</h3>
+
+			<div class="panel-group">
+				<div class="panel panel-default">
+
+					<a class="list-group-item" data-toggle="collapse" data-parent="#accordion" href="#collapse1">一覧表示</a>
+					<div id="collapse1" class="panel-collapse collapse">
+						<div class="panel-body">
+							<button onclick="CheckCredential('list')" class="btn btn-primary">実行</button>
+							<br><br>
+							<pre id="list-json-renderer"></pre>
+						</div>
+					</div>
+				</div>
+
+				<div class="panel panel-default">
+					<a class="list-group-item" data-toggle="collapse" data-parent="#accordion" href="#collapse2">新規作成</a>
+					<div id="collapse2" class="panel-collapse collapse">
+						<div class="panel-body">
+							<form>
+								<div class="form-group">
+									<select class="form-control" id="langSel">
+										<option>ja</option>
+										<option>en</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<input type="text" name="classifierName" placeholder="ClassifierName" class="form-control">
+								</div>
+							</form>
+
+							<div class="input-group">
+								<label class="input-group-btn">
+									<span class="btn btn-primary">
+											トレーニングデータ選択<input type="file" id="csv" style="display:none">
+									</span>
+								</label>
+								<input type="text" class="form-control" readonly="">
+								<output id="list"></output>
+							</div>
+
+							<br>
+							<button onclick="CheckCredential('create')" class="btn btn-primary">実行</button>
+							<br><br>
+							<pre id="create-json-renderer"></pre>
+						</div>
+					</div>
+				</div>
+
+				<div class="panel panel-default">
+					<a class="list-group-item" data-toggle="collapse" data-parent="#accordion" href="#collapse3">状態確認</a>
+					<div id="collapse3" class="panel-collapse collapse">
+						<div class="panel-body">
+							<form>
+								<div class="form-group">
+									<input type="text" name="classifierState" placeholder="classifierID" class="form-control">
+								</div>
+							</form>
+							<button onclick="CheckCredential('state')" class="btn btn-primary">実行</button>
+							<br><br>
+							<pre id="state-json-renderer"></pre>
+						</div>
+					</div>
+				</div>
+
+				<div class="panel panel-default">
+					<a class="list-group-item" data-toggle="collapse" data-parent="#accordion" href="#collapse4">質問</a>
+					<div id="collapse4" class="panel-collapse collapse">
+						<div class="panel-body">
+							<form>
+								<div class="form-group">
+									<input type="text" name="question" placeholder="classifierID" class="form-control">
+								</div>
+								<div class="form-group">
+									<input type="text" name="questionText" placeholder="質問文" class="form-control">
+								</div>
+							</form>
+							<button onclick="CheckCredential('classify')" class="btn btn-primary">実行</button>
+							<br><br>
+							<pre id="classify-json-renderer"></pre>
+						</div>
+					</div>
+				</div>
+
+				<div class="panel panel-default">
+					<a class="list-group-item" data-toggle="collapse" data-parent="#accordion" href="#collapse5">削除</a>
+					<div id="collapse5" class="panel-collapse collapse">
+						<div class="panel-body">
+							<form>
+								<div class="form-group">
+									<input type="text" name="deleteClassifier" placeholder="classifierID" class="form-control">
+								</div>
+							</form>
+							<button onclick="CheckCredential('del')" class="btn btn-primary">実行</button>
+							<br><br>
+							<pre id="del-json-renderer"></pre>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</section>
+	</div>
+
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>
